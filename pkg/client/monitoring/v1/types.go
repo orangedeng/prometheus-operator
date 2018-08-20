@@ -36,7 +36,7 @@ type Prometheus struct {
 	// included when requesting from the apiserver, only from the Prometheus
 	// Operator API itself. More info:
 	// https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status
-	Status *PrometheusStatus `json:"status,omitempty"`
+	Status PrometheusStatus `json:"status,omitempty"`
 }
 
 // PrometheusList is a list of Prometheuses.
@@ -47,7 +47,7 @@ type PrometheusList struct {
 	// More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata
 	metav1.ListMeta `json:"metadata,omitempty"`
 	// List of Prometheuses
-	Items []*Prometheus `json:"items"`
+	Items []Prometheus `json:"items"`
 }
 
 // PrometheusSpec is a specification of the desired behavior of the Prometheus cluster. More info:
@@ -471,7 +471,7 @@ type Endpoint struct {
 	// More info: https://prometheus.io/docs/operating/configuration/#endpoints
 	BasicAuth *BasicAuth `json:"basicAuth,omitempty"`
 	// MetricRelabelConfigs to apply to samples before ingestion.
-	MetricRelabelConfigs []*RelabelConfig `json:"metricRelabelings,omitempty"`
+	MetricRelabelConfigs []RelabelConfig `json:"metricRelabelings,omitempty"`
 	// ProxyURL eg http://proxyserver:2195 Directs scrapes to proxy through this endpoint.
 	ProxyURL *string `json:"proxyUrl,omitempty"`
 }
@@ -509,7 +509,7 @@ type ServiceMonitorList struct {
 	// More info: https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata
 	metav1.ListMeta `json:"metadata,omitempty"`
 	// List of ServiceMonitors
-	Items []*ServiceMonitor `json:"items"`
+	Items []ServiceMonitor `json:"items"`
 }
 
 // PrometheusRuleList is a list of PrometheusRules.
@@ -520,7 +520,7 @@ type PrometheusRuleList struct {
 	// More info: http://releases.k8s.io/HEAD/docs/devel/api-conventions.md#metadata
 	metav1.ListMeta `json:"metadata,omitempty"`
 	// List of Rules
-	Items []*PrometheusRule `json:"items"`
+	Items []PrometheusRule `json:"items"`
 }
 
 // PrometheusRule defines alerting rules for a Prometheus instance
@@ -578,7 +578,7 @@ type Alertmanager struct {
 	// included when requesting from the apiserver, only from the Prometheus
 	// Operator API itself. More info:
 	// https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status
-	Status *AlertmanagerStatus `json:"status,omitempty"`
+	Status AlertmanagerStatus `json:"status,omitempty"`
 }
 
 // AlertmanagerSpec is a specification of the desired behavior of the Alertmanager cluster. More info:

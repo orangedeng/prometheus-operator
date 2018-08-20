@@ -86,15 +86,7 @@ func (in *Alertmanager) DeepCopyInto(out *Alertmanager) {
 	out.TypeMeta = in.TypeMeta
 	in.ObjectMeta.DeepCopyInto(&out.ObjectMeta)
 	in.Spec.DeepCopyInto(&out.Spec)
-	if in.Status != nil {
-		in, out := &in.Status, &out.Status
-		if *in == nil {
-			*out = nil
-		} else {
-			*out = new(AlertmanagerStatus)
-			**out = **in
-		}
-	}
+	out.Status = in.Status
 	return
 }
 
@@ -358,14 +350,9 @@ func (in *Endpoint) DeepCopyInto(out *Endpoint) {
 	}
 	if in.MetricRelabelConfigs != nil {
 		in, out := &in.MetricRelabelConfigs, &out.MetricRelabelConfigs
-		*out = make([]*RelabelConfig, len(*in))
+		*out = make([]RelabelConfig, len(*in))
 		for i := range *in {
-			if (*in)[i] == nil {
-				(*out)[i] = nil
-			} else {
-				(*out)[i] = new(RelabelConfig)
-				(*in)[i].DeepCopyInto((*out)[i])
-			}
+			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.ProxyURL != nil {
@@ -417,15 +404,7 @@ func (in *Prometheus) DeepCopyInto(out *Prometheus) {
 	out.TypeMeta = in.TypeMeta
 	in.ObjectMeta.DeepCopyInto(&out.ObjectMeta)
 	in.Spec.DeepCopyInto(&out.Spec)
-	if in.Status != nil {
-		in, out := &in.Status, &out.Status
-		if *in == nil {
-			*out = nil
-		} else {
-			*out = new(PrometheusStatus)
-			**out = **in
-		}
-	}
+	out.Status = in.Status
 	return
 }
 
@@ -446,14 +425,9 @@ func (in *PrometheusList) DeepCopyInto(out *PrometheusList) {
 	out.ListMeta = in.ListMeta
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
-		*out = make([]*Prometheus, len(*in))
+		*out = make([]Prometheus, len(*in))
 		for i := range *in {
-			if (*in)[i] == nil {
-				(*out)[i] = nil
-			} else {
-				(*out)[i] = new(Prometheus)
-				(*in)[i].DeepCopyInto((*out)[i])
-			}
+			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	return
@@ -495,14 +469,9 @@ func (in *PrometheusRuleList) DeepCopyInto(out *PrometheusRuleList) {
 	out.ListMeta = in.ListMeta
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
-		*out = make([]*PrometheusRule, len(*in))
+		*out = make([]PrometheusRule, len(*in))
 		for i := range *in {
-			if (*in)[i] == nil {
-				(*out)[i] = nil
-			} else {
-				(*out)[i] = new(PrometheusRule)
-				(*in)[i].DeepCopyInto((*out)[i])
-			}
+			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	return
@@ -959,14 +928,9 @@ func (in *ServiceMonitorList) DeepCopyInto(out *ServiceMonitorList) {
 	out.ListMeta = in.ListMeta
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
-		*out = make([]*ServiceMonitor, len(*in))
+		*out = make([]ServiceMonitor, len(*in))
 		for i := range *in {
-			if (*in)[i] == nil {
-				(*out)[i] = nil
-			} else {
-				(*out)[i] = new(ServiceMonitor)
-				(*in)[i].DeepCopyInto((*out)[i])
-			}
+			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	return
